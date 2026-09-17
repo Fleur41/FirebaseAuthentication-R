@@ -1,12 +1,13 @@
 package com.sam.firebaseauthentication_r
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.sam.firebaseauthentication_r.authentication.signup.SignUpScreen
-import com.sam.firebaseauthentication_r.navigation.FirebaseAppNavigation
+import com.sam.firebaseauthentication_r.navigation.AppNavigation
+import com.sam.firebaseauthentication_r.navigation.NavigationDestination
+
 
 @Composable
 fun FirebaseApp(
+    startDestination: NavigationDestination
 ) {
-    FirebaseAppNavigation()
+    AppNavigation(startDestination = startDestination)
 }

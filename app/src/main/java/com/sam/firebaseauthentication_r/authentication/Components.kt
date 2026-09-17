@@ -1,6 +1,5 @@
 package com.sam.firebaseauthentication_r.authentication
 
-import android.service.credentials.Action
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,7 +38,8 @@ fun EmailAndPasswordContent(
     onPasswordChange: (String) -> Unit,
     onEmailClear: () -> Unit,
     onPasswordClear: () -> Unit,
-    actionButtonText: String,
+    actionButtonContent: @Composable () -> Unit,
+    enableActionButton: Boolean = true,
     onActionButtonClick: () -> Unit,
     showConfirmPasswordField: Boolean = false,
     confirmPasswordValue: String = "",
@@ -87,9 +87,10 @@ fun EmailAndPasswordContent(
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = onActionButtonClick
+            onClick = onActionButtonClick,
+            enabled = enableActionButton
         ) {
-            Text(text = actionButtonText)
+            actionButtonContent()
         }
     }
 

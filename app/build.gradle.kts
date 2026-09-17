@@ -41,6 +41,7 @@ dependencies {
     //google serives
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth) //firebase-auth
+    implementation(libs.firebase.firestore) //firebase-firestore
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -48,6 +49,8 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     // Navigation
     implementation(libs.androidx.navigation.compose)
+    // Preferences DataStore
+    implementation(libs.androidx.datastore.preferences)
     // Material 3
     // Adds the most commonly used material icons (like Clear, ArrowBack, Share, etc.)
     implementation(libs.androidx.compose.material.icons.core)
