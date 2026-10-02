@@ -31,4 +31,18 @@ sealed interface NavigationDestination {
         override val route: String
             get() = "splash"
     }
+
+    data object Detail: NavigationDestination{
+        override val title: String
+            get() = "Detail"
+        override val route: String
+            get() = "detail"
+    }
+
+    data object ForgotPassword : NavigationDestination {
+        override val title: String
+            get() = "Forgot Password"
+        override val route: String
+            get() = "forgot_password"
+    }
 }

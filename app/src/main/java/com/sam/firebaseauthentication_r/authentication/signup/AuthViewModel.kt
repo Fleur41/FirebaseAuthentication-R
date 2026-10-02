@@ -62,6 +62,39 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    // password reset
+    fun sendPasswordResetEmail(email: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _authState.value = AuthState.Loading
+            repository.sendPasswordResetEmail(
+                email = email,
+                onSuccess = {
+                    _authState.value = AuthState.Success
+                },
+                onFailure = { exception ->
+                    _authState.value = AuthState.Error(exception.message ?: "Failed to send reset email")
+                }
+            )
+        }
+    }
+
+    // ADDED: Google Sign-In method
+    fun signInWithGoogle(idToken: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _authState.value = AuthState.Loading
+            repository.signInWithGoogle(
+                idToken = idToken,
+                onSuccess = {
+                    saveIsAuthenticated(true)
+                    _authState.value = AuthState.Success
+                },
+                onFailure = {exception ->
+                    _authState.value = AuthState.Error(exception.message ?: "Google Sign-In failed")
+                }
+            )
+        }
+    }
+
     fun saveIsAuthenticated(authenticated: Boolean){
         viewModelScope.launch {
             datastoreRepository.saveIsAuthenticated(authenticated)

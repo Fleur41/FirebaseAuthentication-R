@@ -71,11 +71,11 @@ fun SignUpScreen(
                 .fillMaxSize(),
 
         ) {
-            CompanyInfo(modifier = Modifier.weight(1f))
+            CompanyInfo(modifier = Modifier.weight(0.8f))
 
             EmailAndPasswordContent(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(1.8f)
                     .padding(8.dp),
                 email = email,
                 password = password,
@@ -107,7 +107,7 @@ fun SignUpScreen(
 
             Box(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(0.6f)
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {

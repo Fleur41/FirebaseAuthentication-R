@@ -13,7 +13,10 @@ import com.sam.firebaseauthentication_r.authentication.signin.SignInScreen
 import com.sam.firebaseauthentication_r.authentication.signup.SignUpScreen
 import com.sam.firebaseauthentication_r.components.slideIntoContainerAnimation
 import com.sam.firebaseauthentication_r.components.slideOutOfContainerAnimation
+import com.sam.firebaseauthentication_r.detail.DetailScreen
+import com.sam.firebaseauthentication_r.authentication.forgotpassword.ForgotPasswordScreen
 import com.sam.firebaseauthentication_r.home.HomeScreen
+import com.sam.firebaseauthentication_r.home.HomeViewModel
 import com.sam.firebaseauthentication_r.splash.SplashScreen
 
 @Composable
@@ -36,6 +39,9 @@ fun AppNavigation(
                 authViewModel = hiltViewModel(backStackEntry),
                 onSignUpClick = {
                     navController.navigate(NavigationDestination.SignUp.route)
+                },
+                onForgotPasswordClick = {
+                    navController.navigate(NavigationDestination.ForgotPassword.route)
                 }
             )
         }
@@ -57,13 +63,44 @@ fun AppNavigation(
             enterTransition = { slideIntoContainerAnimation(towards = SlideDirection.Right) },
             exitTransition = { slideOutOfContainerAnimation(towards = SlideDirection.Left) }
         ){
-            HomeScreen()
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            HomeScreen(
+                homeViewModel = homeViewModel,
+                onDetailClick = { navController.navigate(NavigationDestination.Detail.route)}
+            )
+        }
+
+        composable (
+            route = NavigationDestination.Detail.route,
+            enterTransition = { slideIntoContainerAnimation(towards = SlideDirection.Right) },
+            exitTransition = { slideOutOfContainerAnimation(towards = SlideDirection.Left) }
+        ){backStackEntry ->
+            val parentEntry = remember(backStackEntry) {navController.getBackStackEntry(NavigationDestination.Home.route)}
+            DetailScreen(
+                homeViewModel = hiltViewModel(parentEntry),
+                onBackClick = {navController.popBackStack()}
+            )
         }
 
         composable (
             route = NavigationDestination.Splash.route,
         ){
             SplashScreen()
+        }
+
+        // Forgot Password Destination
+        composable(
+            route = NavigationDestination.ForgotPassword.route,
+            enterTransition = { slideIntoContainerAnimation(towards = SlideDirection.Right) },
+            exitTransition = { slideOutOfContainerAnimation(towards = SlideDirection.Left) }
+        ) { backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(NavigationDestination.SignIn.route)
+            }
+            ForgotPasswordScreen(
+                authViewModel = hiltViewModel(parentEntry),
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }

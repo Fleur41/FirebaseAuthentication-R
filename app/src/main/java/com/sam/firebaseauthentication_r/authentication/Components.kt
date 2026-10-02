@@ -32,12 +32,15 @@ fun CompanyInfo(modifier: Modifier = Modifier) {
 @Composable
 fun EmailAndPasswordContent(
     modifier: Modifier = Modifier,
-    email: String,
-    password: String,
-    onEmailChange: (String) -> Unit,
-    onPasswordChange: (String) -> Unit,
-    onEmailClear: () -> Unit,
-    onPasswordClear: () -> Unit,
+    showEmailField: Boolean = true,
+    showPasswordField: Boolean = true,
+    email: String = "",
+    password: String = "",
+    onEmailChange: (String) -> Unit = {},
+    onPasswordChange: (String) -> Unit = {},
+    onEmailClear: () -> Unit = {},
+    onPasswordClear: () -> Unit = {},
+    middleContent: (@Composable () -> Unit)? = null,
     actionButtonContent: @Composable () -> Unit,
     enableActionButton: Boolean = true,
     onActionButtonClick: () -> Unit,
@@ -52,24 +55,28 @@ fun EmailAndPasswordContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CustomTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = email,
-            onValueChange = onEmailChange,
-            placeholderText = "Enter your email",
-            onClear = onEmailClear
-        )
+        if (showEmailField) {
+            CustomTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = email,
+                onValueChange = onEmailChange,
+                placeholderText = "Enter your email",
+                onClear = onEmailClear
+            )
 
-        VerticalSpacer(size = 8)
+            VerticalSpacer(size = 8)
+        }
 
-        CustomTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = password,
-            onValueChange = onPasswordChange,
-            placeholderText = "Enter your password",
-            isPasswordField = true,
-            onClear = onPasswordClear
-        )
+        if (showPasswordField) {
+            CustomTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = password,
+                onValueChange = onPasswordChange,
+                placeholderText = if (showEmailField) "Enter your password" else "Create new password",
+                isPasswordField = true,
+                onClear = onPasswordClear
+            )
+        }
 
         if (showConfirmPasswordField){
             VerticalSpacer(8)
@@ -83,7 +90,11 @@ fun EmailAndPasswordContent(
             )
         }
 
-        VerticalSpacer(size = 16)
+        if (middleContent != null) {
+            middleContent()
+        } else {
+            VerticalSpacer(size = 16)
+        }
 
         Button(
             modifier = Modifier.fillMaxWidth(),

@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     // google services
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sam.firebaseauthentication_r"
-        minSdk = 37
+        minSdk = 26
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
@@ -38,15 +39,25 @@ android {
 }
 
 dependencies {
-    //google serives
+//    google services
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth) //firebase-auth
     implementation(libs.firebase.firestore) //firebase-firestore
+    implementation(libs.firebase.analytics) //firebase-analytics
+    implementation(libs.firebase.crashlytics) //firebase-crashlytics
+    implementation(libs.firebase.messaging) //firebase-messaging
+    implementation(libs.firebase.storage)
+    // Credential Manager
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.hilt.work)
     implementation(libs.androidx.work.runtime.ktx)
+    // accompanist
+    implementation(libs.accompanist.permissions.v0373)
     // Navigation
     implementation(libs.androidx.navigation.compose)
     // Preferences DataStore
