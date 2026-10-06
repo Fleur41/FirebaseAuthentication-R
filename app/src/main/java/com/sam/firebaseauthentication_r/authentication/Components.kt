@@ -1,11 +1,17 @@
 package com.sam.firebaseauthentication_r.authentication
 
+import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,7 +66,14 @@ fun EmailAndPasswordContent(
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
                 onValueChange = onEmailChange,
+                labelText = "Email",
                 placeholderText = "Enter your email",
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Outlined.Email,
+                        contentDescription = "Email Icon"
+                    )
+                },
                 onClear = onEmailClear
             )
 

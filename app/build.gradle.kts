@@ -65,6 +65,10 @@ dependencies {
     // Material 3
     // Adds the most commonly used material icons (like Clear, ArrowBack, Share, etc.)
     implementation(libs.androidx.compose.material.icons.core)
+    // Turbine testing
+    testImplementation(libs.turbine)
+    // RunTest
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test: 1.10.1")
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)

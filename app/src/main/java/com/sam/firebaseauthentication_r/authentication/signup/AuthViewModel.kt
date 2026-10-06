@@ -1,6 +1,6 @@
 package com.sam.firebaseauthentication_r.authentication.signup
 
-import android.R.attr.password
+
 import android.util.Log
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,9 +24,9 @@ class AuthViewModel @Inject constructor(
     private val _authState = MutableStateFlow<AuthState>(AuthState.Initial)
     val authState: StateFlow<AuthState> = _authState.asStateFlow()
     
-    init {
-        Log.d("TAG", "Created an instance of ${this::class.simpleName}")
-    }
+//    init {
+//        Log.d("TAG", "Created an instance of ${this::class.simpleName}")
+//    }
     fun signUp(email: String, password: String){
         viewModelScope.launch(Dispatchers.IO) {
             _authState.value = AuthState.Loading
@@ -93,6 +93,13 @@ class AuthViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    // In real app, we don't need this one here as it is taken care of in the AuthRepository.
+    fun signOut() {
+        repository.signOut()
+        saveIsAuthenticated(false)
+        _authState.value = AuthState.Initial
     }
 
     fun saveIsAuthenticated(authenticated: Boolean){

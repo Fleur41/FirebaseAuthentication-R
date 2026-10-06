@@ -4,17 +4,13 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-10-01T09:51:50.850693Z">
+        <DropdownSelection timestamp="2026-10-02T12:07:28.122859Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/fleur_ai/.android/avd/Pixel_9_Pro.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=R5CX4204JVL" />
             </handle>
           </Target>
         </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="SplashScreenPreview">
-        <option name="selectionMode" value="DROPDOWN" />
         <DialogSelection />
       </SelectionState>
     </selectionStates>

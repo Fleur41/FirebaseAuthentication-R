@@ -84,7 +84,7 @@ fun SignInScreen(
 
     LaunchedEffect(authState) {
         if (authState is AuthState.Success) {
-            // We don'ty need to explicitly to navigate to HomeScreen as it will be taken core of by statFlow in SettingsViewModel
+            // We don't need to explicitly to navigate to HomeScreen as it will be taken core of by statFlow in SettingsViewModel
         }
     }
 
@@ -110,7 +110,7 @@ fun SignInScreen(
                     authViewModel.signInWithGoogle(googleIdTokenCredential.idToken)
                 }
             } catch (e: GetCredentialCancellationException) {
-                Log.w("TAG", "Google Sign-In canceled or reauth failed: ", e)
+                Log.w("TAG", "Google Sign-In canceled or re-auth failed: ", e)
                 if (e.message?.contains("16") == true) {
                     Toast.makeText(context, "Sign-In Failed: Add SHA-1 to Firebase Console", Toast.LENGTH_LONG).show()
                 }
@@ -187,7 +187,7 @@ fun SignInScreen(
                 )
 
                 Column(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1.2f),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -210,7 +210,7 @@ fun SignInScreen(
                     }
                 }
                 SignUpBox(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(.6f),
                     onSignUpClick = onSignUpClick
                 )
             }
@@ -230,7 +230,7 @@ fun SignUpBox(
             .padding(bottom = 16.dp),
         contentAlignment = Alignment.BottomCenter
     ){
-        Row(){
+        Row{
             Text(
                 text = "Don't have an account?",
                 style = MaterialTheme.typography.titleMedium
@@ -238,7 +238,7 @@ fun SignUpBox(
             Spacer(modifier = Modifier.width(4.dp))
             Text(
                 modifier = Modifier.clickable{onSignUpClick()},
-                text = "Sign up instead?",
+                text = "Sign up instead",
                 style = MaterialTheme.typography.titleMedium,
                 textDecoration = TextDecoration.Underline,
                 color = Color.Blue
@@ -255,7 +255,9 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    labelText: String? = null,
     placeholderText: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
     onClear: () -> Unit,
     isPasswordField: Boolean = false
 ) {
@@ -266,6 +268,8 @@ fun CustomTextField(
         modifier = modifier,
         value = value,
         onValueChange = onValueChange,
+        label = if (labelText != null) { { Text(text = labelText) } } else null,
+        leadingIcon = leadingIcon,
         placeholder = { Text(text = placeholderText) },
         shape = RoundedCornerShape(16.dp),
         visualTransformation = visualTransformation,
